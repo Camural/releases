@@ -1,9 +1,10 @@
-# UniFi Protect cameras on your Windows desktop
+# UniFi Protect cameras on your Windows or Mac desktop
 
-Camural is a small Windows tray app for UniFi&reg; Protect. It gives every camera on your console
-its own window on the desktop, and raises a Windows notification with the camera's snapshot already
-inside it when something happens. Video travels from your own console to your PC and stops there.
-No account, no cloud relay, no telemetry, no crash reporting, nothing to subscribe to.
+Camural is a small desktop app for UniFi&reg; Protect. It gives every camera on your console its
+own window on the desktop, and raises a notification with the camera's snapshot already inside it
+when something happens. On Windows it lives in the tray; on the Mac, in the menu bar. Video travels
+from your own console to your computer and stops there. No account, no cloud relay, no telemetry,
+no crash reporting, nothing to subscribe to.
 
 $14.99 once, with a 14-day trial that needs no card. Everything about the product, including the
 purchase page, is at [camural.com](https://camural.com).
@@ -20,23 +21,33 @@ anything other than your own console, and it is described in the
 [privacy policy](https://camural.com/privacy.html).
 
 There is no source code here and none is coming. Camural is proprietary software, licensed under the
-terms shown during installation. The screenshots on this page are served from camural.com rather
-than from the repository, because nothing but release assets is stored here.
+[terms](https://camural.com/terms.html) the Windows installer also shows. The screenshots on this
+page are served from camural.com rather than from the repository, because nothing but release
+assets is stored here.
 
 ## Download
 
-**[CamuralApp-win-Setup.exe](https://github.com/Camural/releases/releases/latest/download/CamuralApp-win-Setup.exe)**,
-about 119 MB, which Windows will show as 113 MB. That link always resolves to the newest release, so
-it never goes stale.
+Both downloads are on the [download page](https://camural.com/download.html) with their current
+version and size, and under [Releases](https://github.com/Camural/releases/releases) here.
 
-The installer puts Camural in `%LOCALAPPDATA%\CamuralApp` for your Windows user alone and never asks
-for administrator. Do not run it elevated: Windows silently discards notifications raised by
-elevated programs, which breaks the main reason to install it. Builds are signed by Seth Walker
-through Azure Trusted Signing.
+**Windows:
+[CamuralApp-win-Setup.exe](https://github.com/Camural/releases/releases/latest/download/CamuralApp-win-Setup.exe)**,
+about 122 MB, which Windows will show as 116 MB. That link always resolves to the newest release, so
+it never goes stale. The installer puts Camural in `%LOCALAPPDATA%\CamuralApp` for your Windows user
+alone and never asks for administrator. Do not run it elevated: Windows silently discards
+notifications raised by elevated programs, which breaks the main reason to install it. Builds are
+signed by Seth Walker through Azure Trusted Signing.
 
-Updates download quietly in the background and are applied when you next exit, never mid-session.
-Before applying one, Camural copies your console details, per-camera rules, confirmed certificates,
-layouts and licence into a dated backup folder, and keeps the last ten.
+**Mac: `Camural-<version>.dmg`**, about 61 MB, attached to the newest release. Open the disk image
+and drag Camural into your Applications folder. It is signed by Seth Walker and notarized by Apple,
+so Gatekeeper checks it with Apple and lets it open with the standard "downloaded from the internet"
+prompt. There is no main window: the menu bar item is the whole app.
+
+Updates download quietly in the background on both. Windows applies one when you next exit, never
+mid-session, and before applying it copies your console details, per-camera rules, confirmed
+certificates, layouts and licence into a dated backup folder, keeping the last ten. The Mac
+verifies a downloaded update against Apple's notarization and Camural's own signing identity, and
+installs it when Camural restarts.
 
 ## What it does
 
@@ -46,10 +57,10 @@ layouts and licence into a dated backup folder, and keeps the last ten.
   unplugging a screen parks those cameras instead of leaving them decoding off the edge of the
   desktop.
 - Per camera, from a right-click menu: always on top, locked in place, four corner presets, and
-  which stream quality it pulls. `Ctrl` + `Alt` + `C` raises every camera above your other windows,
-  and pressing it again puts them back.
+  which stream quality it pulls. On Windows, `Ctrl` + `Alt` + `C` raises every camera above your
+  other windows, and pressing it again puts them back.
 - Double-click a camera for a full-size watch window on its high-quality stream.
-- A camera wall drawn on the Windows wallpaper layer, behind your icons and behind every window,
+- A camera wall drawn behind everything on your desktop, behind your icons and behind every window,
   costing no screen space. You place the tiles on a scaled model of your actual monitors. Camural
   does not replace your wallpaper. It draws tiles over it and leaves the rest showing.
 - PTZ cameras point from a bar of saved positions, from the right-click menu, or from the number
@@ -63,12 +74,13 @@ layouts and licence into a dated backup folder, and keeps the last ten.
 - Which of those raise a notification is set per camera, so plain motion can be off on the
   road-facing camera while people stay on. Audio alarms have a switch of their own, because turning
   off motion should never turn off the alert about a fire.
-- Alert history for the last 24 hours with the snapshots kept alongside, because Windows drops
-  banners while you are in a game or presenting, and history is then the only record.
+- Alert history for the last 24 hours with the snapshots kept alongside, because both Windows and
+  macOS drop banners while you are in a game or presenting, and history is then the only record.
 - Several Protect consoles at once, each camera routed to the console that owns it, so two sites
   that both have a Front Door never collide over alerts, rules or layout.
-- Hardware decoding through Direct3D, the low-bandwidth substream by default in the grid, and pause
-  rules that stop the decoders when the screen is covered, locked, on battery or in energy saver.
+- Hardware decoding, through Direct3D on Windows and the Apple silicon media engine on the Mac, the
+  low-bandwidth substream by default in the grid, and pause rules that stop the decoders when the
+  screen is covered, locked, on battery or in energy saver.
 
 <img src="https://camural.com/img/alert-toast.png" width="400" alt="A Windows notification from Camural showing a person at a front door.">
 
@@ -84,20 +96,26 @@ service so much as imports the licensing code.
   cameras from outside your network needs a VPN you set up yourself.
 - No two-way audio, and it will not answer your doorbell. It tells you the doorbell rang and shows
   you who is there.
-- Camera windows and the wall pause over Remote Desktop, on purpose. Alerts keep working.
-- It conflicts with Wallpaper Engine and Lively. Two apps cannot own the wallpaper layer at once, so
-  use one or the other. Placed camera windows and alerts are unaffected either way.
+- On Windows, camera windows and the wall pause over Remote Desktop, on purpose. Alerts keep
+  working.
+- On Windows it conflicts with Wallpaper Engine and Lively. Two apps cannot own the wallpaper layer
+  at once, so use one or the other. Placed camera windows and alerts are unaffected either way.
 - It is not affiliated with Ubiquiti. Support comes from the author, not from them.
 
 ## Will it run on your setup
 
-Windows 10 version 1809 or later, or Windows 11, 64-bit x64 only. Not Windows on ARM, and not
-32-bit. UniFi Protect 5.3.38 or newer, which is the first firmware to expose the official
+**Windows:** Windows 10 version 1809 or later, or Windows 11, 64-bit x64 only. Not Windows on ARM,
+and not 32-bit. 4 GB of RAM, 8 GB recommended. Any DirectX 11 GPU that decodes H.264 in hardware,
+and one that decodes H.265 if you want a wall of live cameras to be comfortable. 1 GB of free disk.
+
+**Mac:** an Apple silicon Mac, M1 or later, on macOS 14 (Sonoma) or newer. There is no Intel build
+and no Rosetta build.
+
+**Either way:** UniFi Protect 5.3.38 or newer, which is the first firmware to expose the official
 integration API and so a hard floor. Update well past it if you can, to Protect 7.1.83 or later, or
-6.2.72 on the 6.x line, with UniFi OS 5.1.19. 4 GB of RAM, 8 GB recommended. Any DirectX 11 GPU that
-decodes H.264 in hardware, and one that decodes H.265 if you want a wall of live cameras to be
-comfortable. 1 GB of free disk. Your PC has to be able to reach the console, on your own network or
-over your own VPN.
+6.2.72 on the 6.x line, with UniFi OS 5.1.19. Your computer has to be able to reach the console, on
+your own network or over your own VPN. The full requirements tables are on the compatibility pages
+for [Windows](https://camural.com/compatibility.html) and [Mac](https://camural.com/compatibility-mac.html).
 
 You also need an API key that you make yourself on the console, under Settings, then Control Plane,
 then Integrations. That page is hidden from limited accounts, so you need a Super Admin or Owner
@@ -112,19 +130,20 @@ along with the full requirements table.
 
 ## Setting it up
 
-Run the installer, press Find or type your console's address, confirm the certificate fingerprint
-Camural shows you, then paste your API key. Nothing is sent to the console until you have confirmed
-that fingerprint.
+Install it, press Find or type your console's address, confirm the certificate fingerprint Camural
+shows you, then paste your API key. Nothing is sent to the console until you have confirmed that
+fingerprint.
 
-The full walkthrough, with every window pictured, is the manual:
-**[camural.com/how-to-use.html](https://camural.com/how-to-use.html)**.
+The full walkthrough, with every window pictured, is the manual, for
+**[Windows](https://camural.com/how-to-use.html)** and for
+**[Mac](https://camural.com/how-to-use-mac.html)**.
 
 ## What it costs
 
-$14.99 in US dollars, once. One licence covers one person on every Windows PC they own, and it is
-verified offline against a key built into the app, so there is no activation server and nothing that
-can withdraw it later. Stripe is the merchant of record, so Stripe is what appears on your card
-statement, and it handles tax, invoices and refunds within 30 days.
+$14.99 in US dollars, once. One licence covers one person on every computer they own, Windows or Mac,
+and it is verified offline against a key built into the app, so there is no activation server and
+nothing that can withdraw it later. Stripe is the merchant of record, so Stripe is what appears on
+your card statement, and it handles tax, invoices and refunds within 30 days.
 
 The trial is 14 days with nothing held back, and it needs no card and no sign-up. The clock starts
 the first time Camural reaches one of your consoles, not when you download it, so a week spent
@@ -143,16 +162,22 @@ What changes when the trial ends:
 
 Email **support@camural.com**, or open an issue here. Both reach the same person.
 
-Include the version from the top of the tray menu, your Windows version and your Protect version,
-and attach the log from `%LOCALAPPDATA%\Camural\logs`. The log records what Camural did, and never
-your API key, your console password, your stream credentials or your camera images.
+Include the version from the top of the tray menu on Windows or the menu bar menu on the Mac, your
+operating system version and your Protect version, and attach the log. On Windows it is in
+`%LOCALAPPDATA%\Camural\logs`; on the Mac it is in `~/Library/Logs/Camural`, which Console.app
+opens. The log records what Camural did, and never your API key, your console password, your stream
+credentials or your camera images.
 
 ## Open-source components
 
 Camural plays video with [libmpv](https://mpv.io/), used unmodified under the LGPL v2.1 and
-dynamically linked. The unmodified, replaceable `libmpv-2.dll` ships beside the executable, and the
-full licence text is installed alongside it. The remaining third-party components and their licences
-are listed in `THIRD-PARTY-NOTICES.md` inside the installation folder.
+dynamically linked. On Windows the unmodified, replaceable `libmpv-2.dll` ships beside the
+executable. On the Mac, `libmpv.2.dylib` and the FFmpeg libraries beneath it are built by us from
+upstream source in their LGPL configuration and sit in `Camural.app/Contents/Frameworks`, where you
+can replace them. The full licence text is installed alongside on both, and the remaining
+third-party components and their licences are listed in `THIRD-PARTY-NOTICES.md`: in the
+installation folder on Windows, in `Camural.app/Contents/Resources` and at the root of the disk
+image on the Mac.
 
 ---
 
